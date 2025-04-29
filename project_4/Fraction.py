@@ -1,3 +1,5 @@
+from Binary_Search_Tree import Binary_Search_Tree
+
 class Fraction:
 
     def __init__(self, numerator, denominator):
@@ -55,7 +57,12 @@ class Fraction:
         #False otherwise. Recall that floating-point
         #representation is imprecise. Use cross-
         #multiplication to remain in the integer domain.
-        pass
+        self_cross = self.__n * other.__d
+        other_cross = other.__n * self.__d
+
+        if self_cross < other_cross:
+            return True
+        return False
 
     def __gt__(self, other):
         #TODO replace pass with your implementation,
@@ -63,7 +70,13 @@ class Fraction:
         #False otherwise. Recall that floating-point
         #representation is imprecise. Use cross-
         #multiplication to remain in the integer domain.
-        pass
+
+        self_cross = self.__n * other.__d
+        other_cross = other.__n * self.__d
+
+        if self_cross > other_cross:
+            return True
+        return False
 
     def __eq__(self, other):
         #TODO replace pass with your implementation,
@@ -72,7 +85,13 @@ class Fraction:
         #stored in reduced form. Recall that floating-point
         #representation is imprecise. Use cross-
         #multiplication to remain in the integer domain.
-        pass
+
+        self_cross = self.__n * other.__d
+        other_cross = other.__n * self.__d
+
+        if self_cross == other_cross:
+            return True
+        return False
 
     def to_float(self):
         #this is safe because we don't allow a
@@ -95,4 +114,21 @@ if __name__ == '__main__':
     #the new to_list() method, which you must implement.
     #print the original and in-order traversal arrays to show that
     #the fractions have been sorted.
-    pass
+
+    fractions = []
+    fractions.append(Fraction(3,5))
+    fractions.append(Fraction(7,9))
+    fractions.append(Fraction(1,3))
+    fractions.append(Fraction(1,10))
+    fractions.append(Fraction(4,7))
+    fractions.append(Fraction(5,6))
+    fractions.append(Fraction(3,8))
+    fractions.append(Fraction(1,4))
+
+    bst = Binary_Search_Tree()
+    for frac in fractions:
+        bst.insert_element(frac)
+    fractions_in_order = bst.to_list()
+
+    print(fractions)
+    print(fractions_in_order)
