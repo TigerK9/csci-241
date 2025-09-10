@@ -1,0 +1,34 @@
+class Caesar:
+
+    # Constructor method
+    def __init__(self,shift):
+        # self. is used to make the variable stuck in the instance
+        # two leading __ in a variable means it is private, can't be used outside of the class
+        self.__encoder = [None] * 26
+        self.__decoder = [None] * 26
+
+        for k in range(26):
+            self.__encoder[k] = chr((k + shift) % 26 + ord('A'))
+            self.__decoder[k] = chr((k - shift + 26) % 26 + ord('A'))
+
+    def encrypt(self, message):
+        return self.__transform(message, self.__encoder)
+
+    def decrypt(self, secret):
+        return self.__transform(secret, self.__decoder)
+
+    def __transform(self, original, code):
+        msg = list(original)
+        for k in range(len(msg)):
+            if msg[k].isupper():
+                j = ord(msg[k]) - ord('A')
+                msg[k] = code[j]
+        return ''.join(msg)
+
+if __name__ == '__main__':
+    cipher = Caesar(3)
+    message = "THE EAGLE IS IN PLAY; MEET AT JOE'S."
+    coded = cipher.encrypt(message)
+    print('Secret:  ' + coded)
+    answer = cipher.decrypt(coded)
+    print('Message: ' + answer)
